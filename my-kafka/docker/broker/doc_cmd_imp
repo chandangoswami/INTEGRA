@@ -1,0 +1,4 @@
+ docker run -it --rm --name SER1 -h SER1 --network mongo_nw  -p 2181:2181 -e KAFKA_ZOOKEEPER_CONNECT=ZOO1:2181 -e KAFKA_BROKER_ID=22 goswami75/kafka-server
+
+
+docker run -d -h ZOO1 --name ZOO1 --network mongo_nw goswami75/kafka-zoo
