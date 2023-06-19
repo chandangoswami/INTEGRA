@@ -1,4 +1,5 @@
 const { Kafka } = require('kafkajs');
+const jsonData = require('./flowMetaFormat.json') ;
 
 const kafka = new Kafka({
   clientId: 'my-kafka-producer',
@@ -13,11 +14,13 @@ async function runProducer() {
 
   try {
     // Create a message object with the desired topic and payload
+	  
+
     const message = {
       topic: 'my-topic',
       messages: [
         { value: 'Hello Kafka!' },
-        { value: 'This is a message from the Kafka producer.' },
+        { value: jsonData },
       ],
     };
 
@@ -33,4 +36,7 @@ async function runProducer() {
   }
 }
 
+//console.log('JSON data:', jsonData );
+
 runProducer().catch((error) => console.error('Producer error:', error));
+
