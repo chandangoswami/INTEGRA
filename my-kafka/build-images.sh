@@ -2,6 +2,7 @@
 
 set -e
 
-docker build -t goswami75/kafka-zoo:latest  docker/zookeeper
-docker build -t goswami75/kafka-broker:latest  docker/broker
-docker build -t goswami75/kafka-client:latest  docker/client
+docker build -t integra/base:latest  docker/base
+docker build -t integra/kafka-zookeeper:latest  docker/zookeeper
+docker build -t integra/kafka-broker:latest  docker/broker
+#docker build -t Integra/kafka-client:latest  docker/client

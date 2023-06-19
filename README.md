@@ -1,4 +1,13 @@
 # INTEGRA - The general purpose Joiner  #
- This Repo conisits shellscript to build images of kafka and spark via corresponding Docekr files. 
- This repo also consists of Docker-compose files to start cluster which can be scaled to any number of nodes.
- Apart from that, it has building blocks of Sub-Pub POC code which will be part of integra Stack.
+
+This Repo consist Entire Integra project with its Code bases. Following is the structure of project folder.
+ # Integra_infra (root folder)  
+    + frontend  => ReactJS code for presentation layer.
+    + broker    => Kafka Publisher and Kafka Produce code .
+    + compute   => Pyspark code for enabling the Workflow.
+    + my-kafka  => DockerFiles for individual component of kafka Cluster. 
+    + my-spark  => DockerFiles for individual component of Spark Cluster.
+- Readme.md 
+ 
+The above structure of folder will remain until need arises to fork the compute and frontend layers.
+

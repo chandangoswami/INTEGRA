@@ -2,7 +2,7 @@ version: '2.1'
 
 services:
   ZOO1:
-    image: goswami75/kafka-zoo
+    image: integra/kafka-zookeeper
     hostname: ZOO1
     container_name: ZOO1
     ports:
@@ -15,7 +15,7 @@ services:
       ZOOKEEPER_SERVERS: ZOO1:2888:3888
 
   BRO1:
-   image: goswami75/kafka-broker 
+   image: integra/kafka-broker
    hostname: BRO1
    container_name: BRO1
    ports:
@@ -29,7 +29,7 @@ services:
      - ZOO1
 
   BRO2:
-   image: goswami75/kafka-broker 
+   image: integra/kafka-broker 
    hostname: BRO2
    container_name: BRO2
    ports:
@@ -44,7 +44,7 @@ services:
      - BRO1
 
 #  CLIENT:
-#   image: goswami75/kafka-client 
+#   image: integra/kafka-client 
 #   hostname: FE  
 #   container_name: FE 
 #   ports:
