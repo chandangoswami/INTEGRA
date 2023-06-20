@@ -1,5 +1,5 @@
 
-FROM integra/base:latest
+FROM integra/kafka-base:latest
 
 LABEL author="Chandan Goswami " email="goswami75@gmail.com"
 LABEL version="0.2"
