@@ -1,0 +1,1 @@
+{ "wfName": "Invoice Daily ", "wfType": "WFWF_CONN", "wfId": "e923.4232", "ver": "#6ea563", "create_date": "993324002", "modified_date": "9324292342", "trigger": "Eventnull" }

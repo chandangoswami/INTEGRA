@@ -1,0 +1,90 @@
+version: '3.0' 
+
+services:
+  ZOO1:
+    image: integra/kafka-zookeeper
+    hostname: ZOO1
+    container_name: ZOO1
+    ports:
+      - "2181:2181"
+    networks:
+      - INTG_NW
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_SERVER_ID: 10
+      ZOOKEEPER_SERVERS: ZOO1:2888:3888
+    volumes:
+       - ../sub-pub/:/opt/sub-pub
+
+  BRO1:
+   image: integra/kafka-broker
+   hostname: BRO1
+   container_name: BRO1
+   ports:
+     - "9092:9092"
+     - "29092:29092"
+   networks:
+     - INTG_NW
+   environment:
+     OVERRIDE_PROPERTY: "--override broker.id=11 --override zookeeper.connect=ZOO1:2181" 
+   depends_on:
+     - ZOO1
+
+  BRO2:
+   image: integra/kafka-broker 
+   hostname: BRO2
+   container_name: BRO2
+   ports:
+     - "9093:9093"
+     - "29093:29093"
+   networks:
+     - INTG_NW
+   environment:
+     OVERRIDE_PROPERTY: "--override broker.id=12 --override zookeeper.connect=ZOO1:2181" 
+   depends_on:
+     - ZOO1
+     - BRO1
+
+  spark-master:
+    image: integra/spark-master:latest
+    ports:
+      - "4040:4040"
+      - "9090:8080"
+      - "7077:7077"
+      - "8889:8889"
+    networks:
+      - INTG_NW
+    volumes:
+       - ./apps:/opt/spark-apps
+       - ./data:/opt/spark-data
+       - ../compute/:/opt/compute
+    environment:
+      - "SPARK_LOCAL_IP=spark-master"
+    depends_on:
+     - ZOO1
+     - BRO1
+     - BRO2
+
+  spark-worker:
+    image: integra/spark-worker:latest
+    networks:
+      - INTG_NW
+    environment:
+      - SPARK_MASTER=spark://spark-master:7077
+      - SPARK_WORKER_CORES=1
+      - SPARK_WORKER_MEMORY=1G
+      - SPARK_DRIVER_MEMORY=128m
+      - SPARK_EXECUTOR_MEMORY=256m
+    volumes:
+       - ./apps:/opt/spark-apps
+       - ./data:/opt/spark-data
+    depends_on:
+     - ZOO1
+     - BRO1
+     - BRO2
+     - spark-master
+
+networks:
+  INTG_NW:
+    driver: bridge
+

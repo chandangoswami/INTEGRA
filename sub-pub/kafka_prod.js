@@ -2,7 +2,7 @@ const { Kafka } = require('kafkajs');
 const flow_meta = require('./flowMetaFormat');
 
 const kafka = new Kafka({
-  clientId: 'my-kafka-producer',
+  clientId: 'fe-request',
   brokers: ['BRO1:9092'], // Replace with your Kafka broker(s) address
 });
 
@@ -15,11 +15,7 @@ async function runProducer() {
   try {
     // Create a message object with the desired topic and payload
     const message = {
-      topic: 'my-topic',
-      //messages: [
-      //  { value: 'Hello Kafka!' },
-      //  { value: 'This is a message from the Kafka producer.' },
-     // ],
+      topic: 'fe-request' ,
       messages: [
         { value: JSON.stringify(flow_meta )  }, 
       ],
@@ -36,7 +32,5 @@ async function runProducer() {
     await producer.disconnect();
   }
 }
-
-//console.log(flow_meta) ;
 
 runProducer().catch((error) => console.error('Producer error:', error));

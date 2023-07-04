@@ -8,17 +8,19 @@ services:
       - "7077:7077"
       - "8889:8889"
     networks:
-      - BE_NW
+      - INTG_NW
     volumes:
        - ./apps:/opt/spark-apps
        - ./data:/opt/spark-data
+       - ../compute/:/opt/compute
+
     environment:
       - "SPARK_LOCAL_IP=spark-master"
 
   spark-worker:
     image: integra/spark-worker:latest
     networks:
-      - BE_NW
+      - INTG_NW
     depends_on:
       - spark-master
     environment:
@@ -32,6 +34,5 @@ services:
        - ./data:/opt/spark-data
 
 networks:
-  BE_NW:
+  INTG_NW:
     driver: bridge
-

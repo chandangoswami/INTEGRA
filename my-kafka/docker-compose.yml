@@ -8,7 +8,7 @@ services:
     ports:
       - "2181:2181"
     networks:
-      - borker_nw
+      - INTG_NW
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_SERVER_ID: 10
@@ -24,7 +24,7 @@ services:
      - "9092:9092"
      - "29092:29092"
    networks:
-     - borker_nw
+     - INTG_NW
    environment:
      OVERRIDE_PROPERTY: "--override broker.id=11 --override zookeeper.connect=ZOO1:2181" 
    depends_on:
@@ -38,7 +38,7 @@ services:
      - "9093:9093"
      - "29093:29093"
    networks:
-     - borker_nw
+     - INTG_NW
    environment:
      OVERRIDE_PROPERTY: "--override broker.id=12 --override zookeeper.connect=ZOO1:2181" 
    depends_on:
@@ -52,8 +52,8 @@ services:
 #   ports:
 #     - "4000:4000"
 #   networks:
-#     - borker_nw
+#     - INTG_NW
 
 networks:
-  borker_nw:
+  INTG_NW:
     driver: bridge
