@@ -1,0 +1,1 @@
+ docker run --name lab -v "C:\Users\chand\Desktop\Integra_soft\INTEGAR_CODE_MVP\Dock\INTEGRA\compute\app:/opt/integra" -d integra/computelab

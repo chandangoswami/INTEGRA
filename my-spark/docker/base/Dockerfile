@@ -1,5 +1,5 @@
 FROM adoptopenjdk/openjdk8
-LABEL author="Daniel Ciocirlan" email="daniel@rockthejvm.com"
+LABEL author="Chandan Goswami" email="chandanG@integra.com"
 LABEL version="0.2"
 
 ENV DAEMON_RUN=true

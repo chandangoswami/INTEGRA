@@ -6,7 +6,6 @@ from pyspark.sql.functions import col,from_json
 kafkaBrokers = "BRO1:9092"
 topic = "fe-request"
 
-
 # Create a SparkSession
 spark = SparkSession.builder \
     .appName("IntegraConsumer") \
@@ -22,14 +21,6 @@ df_raw = spark.readStream \
     .option("subscribe", topic) \
     .load()
 
-
-df1 = (df_raw
-    .withColumn("key", df_raw["key"].cast(StringType()))
-    .withColumn("value", df_raw["value"].cast(StringType()))
-    )
-
-dfJSON = df1.select("value")
-
 flow_schema =  StructType ([
 StructField("wfName",StringType(),True),
 StructField("wfType",StringType(),True),
@@ -40,9 +31,15 @@ StructField("modified_date",StringType(),True),
 StructField("trigger",StringType(),True) 
 ]) 
 
-dfJ = dfJSON.withColumn("jsonData",from_json(col("value"),flow_schema)).select("jsonData.*")
+df_casted = (df_raw
+    .withColumn("key", df_raw["key"].cast(StringType()))
+    .withColumn("value", df_raw["value"].cast(StringType()))
+    ).select('value').withColumn("jsonData",from_json(col("value"),flow_schema)).select("jsonData.*") 
 
-query = df1.select("value")  \
+print("Column name : ")
+print(df_casted.columns)
+
+query = df_casted.select(['wfName', 'wfType', 'wfId', 'ver', 'create_date', 'modified_date', 'trigger' ]) \
     .writeStream \
     .outputMode("append")\
     .option("multiline","true")\
