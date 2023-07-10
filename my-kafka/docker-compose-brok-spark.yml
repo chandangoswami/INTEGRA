@@ -14,7 +14,7 @@ services:
       ZOOKEEPER_SERVER_ID: 10
       ZOOKEEPER_SERVERS: ZOO1:2888:3888
     volumes:
-       - ../sub-pub/:/opt/sub-pub
+       - ../frontend:/opt/frontend
 
   BRO1:
    image: integra/kafka-broker

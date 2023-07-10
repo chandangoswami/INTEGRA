@@ -1,0 +1,2 @@
+docker exec -it my-kafka-spark-master-1 bash
+
