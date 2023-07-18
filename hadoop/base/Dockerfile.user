@@ -1,0 +1,30 @@
+# Base image
+FROM ubuntu:latest
+
+# Install SSH server and utilities
+RUN apt-get update && \
+    apt-get install -y openssh-server && \
+    apt-get clean
+
+# Enable passwordless SSH login
+RUN mkdir /var/run/sshd && \
+    sed -ri 's/^#?PermitEmptyPasswords\s+.*/PermitEmptyPasswords yes/' /etc/ssh/sshd_config && \
+    sed -ri 's/^#?PasswordAuthentication\s+.*/PasswordAuthentication no/' /etc/ssh/sshd_config && \
+    sed -ri 's/^#?ChallengeResponseAuthentication\s+.*/ChallengeResponseAuthentication no/' /etc/ssh/sshd_config
+
+# Add a new user
+#RUN useradd -ms /bin/bash integra
+
+# Set passwordless login for the root user
+RUN mkdir -p ~/.ssh && \
+    chmod 700 ~/.ssh && \
+    ssh-keygen -f ~/.ssh/id_rsa -N '' && \
+    cp ~/.ssh/id_rsa.pub ~/.ssh/authorized_keys && \
+    echo "Host * " > ~/.ssh/config && \
+    echo "    StrictHostKeyChecking no " >> ~/.ssh/config && \
+    chmod 600 ~/.ssh/* 
+    #chown -R integra:integra /home/integra/.ssh
+
+# Set the default command to start SSH server
+CMD ["/usr/sbin/sshd", "-D"]
+
