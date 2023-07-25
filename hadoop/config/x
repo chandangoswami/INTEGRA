@@ -1,0 +1,4 @@
+172.18.0.2 hadoop-nameNode-1
+172.18.0.5 hadoop-dataNode-1
+172.18.0.3 hadoop-dataNode-2
+172.18.0.4 hadoop-dataNode-3
