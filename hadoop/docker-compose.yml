@@ -5,7 +5,13 @@ services:
     image: hadoop_img:latest
     hostname: nameNode
     ports:
-      - 2022:22
+      - "2022:22"
+      - "8080:8080"
+      - "9000:9000"
+      - "9870:9870"
+      - "8088:8088"
+      - "7077:7077"
+      - "4040:4040"
     volumes:
       - ./data:/opt/hadoop/data
     environment:
