@@ -125,3 +125,9 @@ fi
 if [ -d "$HADOOP_HOME/sbin" ] ; then
     PATH="$HADOOP_HOME/sbin:$PATH"
 fi
+
+# set PATH so it includes hadoop sbin
+if [ -d "$SPARK_HOME" ] ; then
+    source $SPARK_HOME/conf/spark-env.sh
+fi
+

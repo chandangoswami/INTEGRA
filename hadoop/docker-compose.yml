@@ -12,6 +12,11 @@ services:
       - "8088:8088"
       - "7077:7077"
       - "4040:4040"
+    deploy:
+      resources:
+       limits:
+        cpus: '0.50'
+        memory: 7g
     volumes:
       - ./data:/opt/hadoop/data
     environment:

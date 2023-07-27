@@ -80,12 +80,18 @@
 # - SPARK_BEELINE_OPTS, to set config properties only for the beeline cli (e.g. "-Dx=y")
 # - SPARK_BEELINE_MEMORY, Memory for beeline (e.g. 1000M, 2G) (Default: 1G)
 
-# INtegra sepcific settion
-export SPARK_HOME=/home/hadoop/spark-3.4.1
-export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
-export YARN_CONF_DIR=$HADOOP_HOME/etc/hadoop
-export SPARK_WORKER_DIR=$SPARK_HOME/work
-export SPARK_LOG_DIR=$SPARK_HOME/log
-export SPARK_MASTER_IP=hadoop-nameNode-1 
+# INTEGRA SEPCIFIC SECTION
+#export SPARK_HOME=/home/hadoop/spark-3.4.1
 
-export PATH=$SPARK_HOME/bin:$SPARK_HOME/sbin:$PATH
+if [ -d "$SPARK_HOME" ] ; then
+ SPARK_WORKER_DIR=$SPARK_HOME/work
+ SPARK_LOG_DIR=$SPARK_HOME/log
+ SPARK_MASTER_IP=hadoop-nameNode-1 
+ PYTHONPATH=$(ZIPS=("$SPARK_HOME"/python/lib/*.zip); IFS=:; echo "${ZIPS[*]}"):$PYTHONPATH
+ PATH=$SPARK_HOME/bin:$SPARK_HOME/sbin:$PATH
+fi
+
+if [ -d "$HADOOP_HOME" ] ; then
+ HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
+ YARN_CONF_DIR=$HADOOP_HOME/etc/hadoop
+fi
