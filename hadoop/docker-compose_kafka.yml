@@ -1,0 +1,50 @@
+version: '2.1'
+
+services:
+  ZOO1:
+    image: integra/kafka-zookeeper
+    hostname: ZOO1
+    container_name: ZOO1
+    ports:
+      - "2181:2181"
+    networks:
+      - INTG_NW
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_SERVER_ID: 10
+      ZOOKEEPER_SERVERS: ZOO1:2888:3888
+    volumes:
+       - ../sub-pub/:/opt/sub-pub
+
+  BRO1:
+   image: integra/kafka-broker
+   hostname: BRO1
+   container_name: BRO1
+   ports:
+     - "9092:9092"
+     - "29092:29092"
+   networks:
+     - INTG_NW
+   environment:
+     OVERRIDE_PROPERTY: "--override broker.id=11 --override zookeeper.connect=ZOO1:2181" 
+   depends_on:
+     - ZOO1
+
+  BRO2:
+   image: integra/kafka-broker 
+   hostname: BRO2
+   container_name: BRO2
+   ports:
+     - "9093:9093"
+     - "29093:29093"
+   networks:
+     - INTG_NW
+   environment:
+     OVERRIDE_PROPERTY: "--override broker.id=12 --override zookeeper.connect=ZOO1:2181" 
+   depends_on:
+     - ZOO1
+     - BRO1
+
+networks:
+  INTG_NW:
+    driver: bridge

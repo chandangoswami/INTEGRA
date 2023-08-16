@@ -1,6 +1,9 @@
 #!/bin/bash
 
-rm remote_hosts.txt
+if [ -f "remote_hosts.txt" ] ; then
+ echo " Previous remote_hosts.txt exists. Deleting it ..."
+ rm remote_hosts.txt
+fi 
 
 # List of host names
 hosts=("hadoop-nameNode-1" "hadoop-dataNode-1" "hadoop-dataNode-2" "hadoop-dataNode-3")

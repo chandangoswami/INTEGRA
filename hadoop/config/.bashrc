@@ -131,3 +131,8 @@ if [ -d "$SPARK_HOME" ] ; then
     source $SPARK_HOME/conf/spark-env.sh
 fi
 
+alias jps='jps | grep -v Jps | sort -n '
+alias hdls='hdfs dfs -ls'
+alias hdmkdir='hdfs dfs -mkdir'
+alias hdput='hdfs dfs -put'
+

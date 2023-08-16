@@ -87,7 +87,7 @@ if [ -d "$SPARK_HOME" ] ; then
  SPARK_WORKER_DIR=$SPARK_HOME/work
  SPARK_LOG_DIR=$SPARK_HOME/log
  SPARK_MASTER_IP=hadoop-nameNode-1 
- PYTHONPATH=$(ZIPS=("$SPARK_HOME"/python/lib/*.zip); IFS=:; echo "${ZIPS[*]}"):$PYTHONPATH
+ export PYTHONPATH=$(ZIPS=("$SPARK_HOME"/python/lib/*.zip); IFS=:; echo "${ZIPS[*]}"):$PYTHONPATH
  PATH=$SPARK_HOME/bin:$SPARK_HOME/sbin:$PATH
 fi
 
