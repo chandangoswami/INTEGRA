@@ -12,6 +12,7 @@ services:
       - "8088:8088"
       - "7077:7077"
       - "4040:4040"
+      - "8888:8888"
     volumes:
       - ./data:/opt/hadoop/data
       - ./app:/opt/hadoop/app
@@ -25,6 +26,17 @@ services:
     volumes:
       - ./data:/opt/hadoop/data
       - ./app:/opt/hadoop/app
+    networks:
+      - INTG_NW
+
+  sftp:
+    image: goswami75/mysftp:latest
+    depends_on:
+      - nameNode
+    volumes:
+      - ./data:/opt/hadoop/data
+    ports:
+      - "2023:22"
     networks:
       - INTG_NW
 

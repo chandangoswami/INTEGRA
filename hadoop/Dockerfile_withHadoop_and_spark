@@ -26,10 +26,13 @@ RUN apt-get update && apt-get install -y \
     net-tools \
     python3.10 \
     python3.10-venv \
+    pip \
     wget \
     && apt-get clean 
 
 RUN  ln -s /usr/bin/python3 /usr/bin/python
+
+RUN  pip install paramiko numpy pandas
 
 # Configure SSH for Password less Login 
   ARG SPARK_VER=3.4.1
@@ -95,7 +98,7 @@ RUN mkdir -p $HADOOP_CONF_DIR/data/nameNode
 RUN mkdir -p $HADOOP_CONF_DIR/data/dataNode
 
 # Expose Hadoop ports
-EXPOSE 8080 7077 4040 9000 9870 8088
+EXPOSE 8080 7077 4040 9000 9870 8088 8888
 
 
 # SPARK INSTALLATION 

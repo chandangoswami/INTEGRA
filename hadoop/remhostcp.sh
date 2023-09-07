@@ -25,8 +25,14 @@ for hst in "${hosts[@]}"; do
     fi
 done
 
+    if [ -f "remote_hosts.txt" ]; then
         echo "remote_hosts.txt created with content "
         cat remote_hosts.txt 
+    else 
+        echo "Cluster not Running"
+	echo "Exiting  .... "
+	exit 
+    fi
 
 for hst in "${hosts[@]}"; do
     docker cp remote_hosts.txt $hst:/tmp/

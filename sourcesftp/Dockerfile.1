@@ -1,0 +1,23 @@
+# Use a base image with OpenSSH installed
+FROM ubuntu:latest
+
+# Set environment variables
+ENV SFTP_USER=integra
+ENV SFTP_PASS=bpt799
+
+# Install OpenSSH and create the SFTP user
+RUN apt-get update && \
+    apt-get install -y openssh-server && \
+    apt-get install -y passwd && \
+    mkdir -p /var/run/sshd 
+
+RUN echo "${SFTP_USER}:${SFTP_PASS}" | chpasswd && \
+    useradd -m -d /home/${SFTP_USER} -s /bin/bash ${SFTP_USER} && \
+    chown -R ${SFTP_USER}:${SFTP_USER} /home/${SFTP_USER}
+
+# Expose port 22 for SSH
+EXPOSE 22
+
+# Start SSH server
+CMD ["/usr/sbin/sshd", "-D"]
+
