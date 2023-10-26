@@ -2,8 +2,9 @@ from pyspark.sql import SparkSession
 
 from lib.logger import Log4j 
 from integra.com.Session import getSparkSession
-from integra.com.utils import read_kafka, cast_raw_data 
+from integra.com.utils import read_kafka, cast_raw_data
 from integra.parser  import parseInput 
+from integra.com.FlowSchema import * 
 
 kafkaBrokers = "BRO1:9092"
 topic = "fe-request"
@@ -20,17 +21,21 @@ def main(kafkaBrokers, topic):
        
     # Read data from Event from Kafka as a streaming DataFrame
     df_raw = read_kafka(spark ,kafkaBrokers, topic,logger) 
-    
-    
-    def process_batch_message(df_raw, batch_id ) :
-           # Cast Raw data from  Kafka
-            flow_metaData = cast_raw_data(df_raw , logger )
-            print(type(flow_metaData))
-            
-            if flow_metaData.count() > 0 :
-               for wf in flow_metaData.collect() :
-                flow_metaData.show()
-
+ 
+    # Process each streaming DataFrame
+    def process_batch_message(df_raw , index ) :
+    # Cast Raw data from  Kafka
+        flow_metaData = cast_raw_data(df_raw , logger ) 
+        if flow_metaData.count() > 0 :
+            for wf in flow_metaData.collect() :
+                try:
+                    rdict = wf.asDict(True)
+                    #    print(rdict)
+                    pydRec = FlowMetaC(**rdict)
+                    print(pydRec)       
+                except ValueError as er :
+                    print('Format error : \n', er)
+        
     query = df_raw.writeStream \
         .foreachBatch(process_batch_message) \
         .option("checkpointLocation", "/tmp") \

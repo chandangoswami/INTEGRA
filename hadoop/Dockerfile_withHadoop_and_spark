@@ -32,7 +32,7 @@ RUN apt-get update && apt-get install -y \
 
 RUN  ln -s /usr/bin/python3 /usr/bin/python
 
-RUN  pip install paramiko numpy pandas
+RUN  pip install paramiko numpy pandas pydantic
 
 # Configure SSH for Password less Login 
   ARG SPARK_VER=3.4.1

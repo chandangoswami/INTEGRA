@@ -1,0 +1,85 @@
+  {
+  "wfName": "1111 First Daily ",
+  "wfType": "WF",
+  "wfId": "d6209381-c9b5-437d-8844-99eeb71fdfeb" ,
+  "ver": "#6ea563",
+  "create_date": "993324002",
+  "modified_date": "9324292342" ,
+  "trigger": "Scheduled" ,
+  "inputNode": [
+    {
+      "nodeType": "IN_SFTP",
+      "nodeName": "InvoiceFileDaily",
+      "nodeID": "uuid0",
+      "fileFormat": "cvs|tsv|avro|json|parquet",
+      "filename": "InvoiceDaily.csv",
+      "folder": "/sftp/incoming",
+      "connectString": {
+        "endPoint": "sftp://localhost",
+        "port": "2022",
+        "valutFlag": true,
+        "userID": "chandanId",
+        "passwd": "bpt799",
+        "connName": "ContolCenterServer"
+      },
+      "inSchema": null,
+      "outSchema": [
+        {
+          "colname": "invoiceMonth",
+          "dataType": "String",
+          "nullable": false,
+          "maxLen": 10
+        },
+        {
+          "colname": "invoiceDate",
+          "dataType": "date",
+          "nullable": true,
+          "minLen": 0
+        }
+      ],
+      "nextRefs": [
+        "e991.e923.e2t",
+        "e991.e923.e222"
+      ],
+      "backRefs": null,
+      "cacheFlag": false
+    },
+    {
+      "nodeType": "IN_SFTP",
+      "nodeName": "2222Node",
+      "nodeID": "uuid0",
+      "fileFormat": "avro",
+      "filename": "InvoiceDaily.csv",
+      "folder": "/sftp/incoming",
+      "connectString": {
+        "endPoint": "sftp://172.12.22.12",
+        "port": "3333",
+        "valutFlag": true,
+        "userID": "Goswami",
+        "passwd": "799",
+        "connName": "ChargeFile"
+      },
+      "inSchema": null,
+      "outSchema": [
+        {
+          "colname": "invoiceMonth",
+          "dataType": "String",
+          "nullable": false,
+          "maxLen": 10
+        },
+        {
+          "colname": "invoiceDate",
+          "dataType": "date",
+          "nullable": true,
+          "minLen": 0
+        }
+      ],
+      "nextRefs": [
+        "e991.e923.e2t",
+        "e991.e923.e222"
+      ],
+      "backRefs": null,
+      "cacheFlag": false
+    }
+  ]
+ }

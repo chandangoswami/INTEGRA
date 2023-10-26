@@ -4,6 +4,9 @@ from pyspark import SparkConf
 from pyspark.sql.types import StructType, StructField, StringType
 from pyspark.sql.functions import col,from_json 
 
+from integra.com.FlowSchema import *
+
+
 def load_survey_df(spark, data_file):
     return spark.read \
         .option("header", "true") \
@@ -38,23 +41,10 @@ def read_kafka (spark ,kafkaBrokers, topic, logger ) :
     
 def cast_raw_data ( df_raw , logger) :
    
-    flow_schema =  StructType ([
-    StructField("wfName",StringType(),True),
-    StructField("wfType",StringType(),True),
-    StructField("wfId",StringType(),True),
-    StructField("ver",StringType(),True),
-    StructField("create_date",StringType(),True),
-    StructField("modified_date",StringType(),True),
-    StructField("trigger",StringType(),True) ,
-    StructField("inputNode",StringType(),True),
-    StructField("functionNode",StringType(),True),
-    StructField("outputNode",StringType(),True)
-    ])
-
     df_casted = (df_raw
     .withColumn("key", df_raw["key"].cast(StringType()))
     .withColumn("value", df_raw["value"].cast(StringType()))
-    ).select('value').withColumn("jsonData",from_json(col("value"),flow_schema)).select("jsonData.*") 
+    ).select('value').withColumn("jsonData",from_json(col("value"),flowMetaSchema)).select("jsonData.*") 
    
     logger.info("Returning Casted data ")
     

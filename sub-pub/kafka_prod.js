@@ -1,5 +1,6 @@
 const { Kafka } = require('kafkajs');
-const flow_meta = require('./flowMetaFormat');
+//const flow_meta = require('./flowMetaFormat');
+const flow_meta = require('./flowMetaFormat_input');
 
 const kafka = new Kafka({
   clientId: 'fe-request',
