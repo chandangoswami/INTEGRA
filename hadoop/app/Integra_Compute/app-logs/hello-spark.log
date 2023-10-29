@@ -1,4 +1,41 @@
-23/10/26 18:26:31 INFO IntegraConsumer: Starting Integra Comsumer
-23/10/26 18:26:31 INFO IntegraConsumer: Reading kafka
-23/10/26 18:26:37 INFO IntegraConsumer: Returning Casted data 
-23/10/26 18:26:58 INFO IntegraConsumer: Returning Casted data 
+23/10/29 18:56:24 INFO IntegraConsumer: Starting Integra Comsumer
+23/10/29 18:56:24 INFO IntegraConsumer: Listining kafka Queue topic : "fe-request" At Servers : " BRO1:9092" 
+23/10/29 18:56:32 INFO IntegraConsumer: Kafka Message  valid and proceeding with Input Node Processing
+23/10/29 18:56:32 INFO IntegraConsumer: Input node processing 
+ Creating DataFrame Lists
+23/10/29 18:56:32 INFO IntegraConsumer: Fetching DataFrame from file InvoiceDaily.csv
+23/10/29 18:56:32 INFO IntegraConsumer: Fetching DataFrame from file InvoiceDaily.csv
+23/10/29 18:56:32 INFO IntegraConsumer: Input Node Processing Complete
+23/10/29 18:56:32 INFO IntegraConsumer: Function node processing 
+ Creating DataFrame Lists for function Nodes
+23/10/29 18:56:32 INFO IntegraConsumer: Function Node Processing Complete
+23/10/29 18:56:32 INFO IntegraConsumer: Function node processing 
+ Creating DataFrame Lists for function Nodes
+23/10/29 18:56:32 INFO IntegraConsumer: OutPutNode Node Processing Complete
+ Waiting for Next Workflow
+23/10/29 18:56:59 INFO IntegraConsumer: Kafka Message  valid and proceeding with Input Node Processing
+23/10/29 18:56:59 INFO IntegraConsumer: Input node processing 
+ Creating DataFrame Lists
+23/10/29 18:56:59 INFO IntegraConsumer: Fetching DataFrame from file InvoiceDaily.csv
+23/10/29 18:56:59 INFO IntegraConsumer: Fetching DataFrame from file InvoiceDaily.csv
+23/10/29 18:56:59 INFO IntegraConsumer: Input Node Processing Complete
+23/10/29 18:56:59 INFO IntegraConsumer: Function node processing 
+ Creating DataFrame Lists for function Nodes
+23/10/29 18:56:59 INFO IntegraConsumer: Function Node Processing Complete
+23/10/29 18:56:59 INFO IntegraConsumer: Function node processing 
+ Creating DataFrame Lists for function Nodes
+23/10/29 18:56:59 INFO IntegraConsumer: OutPutNode Node Processing Complete
+ Waiting for Next Workflow
+23/10/29 18:58:59 INFO IntegraConsumer: Kafka Message  valid and proceeding with Input Node Processing
+23/10/29 18:58:59 INFO IntegraConsumer: Input node processing 
+ Creating DataFrame Lists
+23/10/29 18:58:59 INFO IntegraConsumer: Fetching DataFrame from file InvoiceDaily.csv
+23/10/29 18:58:59 INFO IntegraConsumer: Fetching DataFrame from file InvoiceDaily.csv
+23/10/29 18:58:59 INFO IntegraConsumer: Input Node Processing Complete
+23/10/29 18:58:59 INFO IntegraConsumer: Function node processing 
+ Creating DataFrame Lists for function Nodes
+23/10/29 18:58:59 INFO IntegraConsumer: Function Node Processing Complete
+23/10/29 18:58:59 INFO IntegraConsumer: Function node processing 
+ Creating DataFrame Lists for function Nodes
+23/10/29 18:58:59 INFO IntegraConsumer: OutPutNode Node Processing Complete
+ Waiting for Next Workflow
