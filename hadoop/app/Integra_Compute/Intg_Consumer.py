@@ -35,12 +35,11 @@ def main(kafkaBrokers, topic):
     
     # Get and initialize Logger instance
     logger = Log4j(spark) 
-    
-    logger.info("Starting Integra Comsumer")
+    logger.info("!!!! STARTING INTEGRA COMPUTE SERVER !!!! ")
        
     # Read data from Event from Kafka as a streaming DataFrame
     df_raw = read_kafka(spark ,kafkaBrokers, topic,logger) 
- 
+    
     # Process each streaming DataFrame
     def process_batch_message(df_raw , index ) :
     # Cast Raw data from  Kafka
@@ -51,13 +50,13 @@ def main(kafkaBrokers, topic):
                 try:
                     rdict = wf.asDict(True)
                     pydRec = FlowMetaC(**rdict)
-                    logger.info("Kafka Message  valid and proceeding with Input Node Processing") 
-                    process_inputNodes(pydRec , logger )
-                    logger.info("Input Node Processing Complete")
-                    process_functionNodes(pydRec , logger )
-                    logger.info("Function Node Processing Complete")
+                    logger.info("==> STEP-1 WF MetaData Read from Kafka and it is Pydantic VALID !!. <== ") 
+                    dfList = process_inputNodes(pydRec , logger )
+                    logger.info("==> STEP-2 SUCCESS !!<==")
+                    process_functionNodes(pydRec , dfList, logger )
+                    logger.info("==> STEP-3 SUCCESS !!<==")
                     process_outPutNodes(pydRec , logger )
-                    logger.info("OutPutNode Node Processing Complete\n Waiting for Next Workflow")    
+                    logger.info("==> STEP-4 SUCCESS !!<==")
                 except ValueError as er :
                     print('Format error and ignoring the message : \n', er)
         
@@ -65,7 +64,7 @@ def main(kafkaBrokers, topic):
         .foreachBatch(process_batch_message) \
         .option("checkpointLocation", "/tmp") \
         .start().awaitTermination()
-    
+        
     logger.info("Stoping Integra Comsumer{}", type(query) )
 
 # entry point for PySpark ETL application

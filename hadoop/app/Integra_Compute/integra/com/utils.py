@@ -33,7 +33,7 @@ def get_spark_app_config():
 
 def read_kafka (spark ,kafkaBrokers, topic, logger ) : 
     
-    logger.info("Listining kafka Queue topic : \""+ topic + "\" At Servers : \" "+ kafkaBrokers + "\" ")
+    logger.info(f"Listining kafka Queue Topic Name [ {topic} ] and Servers [ {kafkaBrokers} ] ")
     
     return spark.readStream \
     .format("kafka") \
@@ -47,8 +47,6 @@ def cast_raw_data ( df_raw:DataFrame , logger: Log4j ) :
     df_casted = (df_raw
     .withColumn("key", df_raw["key"].cast(StringType()))
     .withColumn("value", df_raw["value"].cast(StringType()))
-    ).select('value').withColumn("jsonData",from_json(col("value"),flowMetaSchema)).select("jsonData.*") 
-   
-   
+    ).select('value').withColumn("jsonData",from_json(col("value"),flowMetaSchema)).select("jsonData.*")    
    
     return df_casted
