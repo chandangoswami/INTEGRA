@@ -1,5 +1,5 @@
   {
-  "wfName": "1111 First Daily ",
+  "wfName": "InvoiceDaily",
   "wfType": "WF",
   "wfId": "d6209381-c9b5-437d-8844-99eeb71fdfeb" ,
   "ver": "#6ea563",
@@ -13,12 +13,12 @@
       "nodeID": "uuid0",
       "fileFormat": "cvs|tsv|avro|json|parquet",
       "filename": "InvoiceDaily.csv",
-      "folder": "/sftp/incoming",
+      "folder": "/home/user1/data",
       "connectString": {
-        "endPoint": "sftp://localhost",
-        "port": "2022",
-        "valutFlag": true,
-        "userID": "chandanId",
+        "endPoint": "hadoop-sftp-1",
+        "port": "22",
+        "valutFlag": false,
+        "userID": "user1",
         "passwd": "bpt799",
         "connName": "ContolCenterServer"
       },
@@ -46,18 +46,18 @@
     },
     {
       "nodeType": "IN_SFTP",
-      "nodeName": "2222Node",
+      "nodeName": "InvoiceFileDaily",
       "nodeID": "uuid0",
-      "fileFormat": "avro",
+      "fileFormat": "cvs|tsv|avro|json|parquet",
       "filename": "InvoiceDaily.csv",
-      "folder": "/sftp/incoming",
+      "folder": "/home/user1/data",
       "connectString": {
-        "endPoint": "sftp://172.12.22.12",
-        "port": "3333",
-        "valutFlag": true,
-        "userID": "Goswami",
-        "passwd": "799",
-        "connName": "ChargeFile"
+        "endPoint": "hadoop-sftp-1",
+        "port": "22",
+        "valutFlag": false,
+        "userID": "user1",
+        "passwd": "bpt799",
+        "connName": "ContolCenterServer"
       },
       "inSchema": null,
       "outSchema": [

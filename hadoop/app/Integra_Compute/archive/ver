@@ -1,6 +1,0 @@
-export SPARK_VERSION=3.4.1
-export SCALA_VERSION=2.13
-export HADOOP_VERSION=3
-
-# wget --no-verbose 
-# https://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}-scala${SCALA_VERSION}.tgz

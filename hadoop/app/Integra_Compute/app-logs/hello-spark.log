@@ -1,9 +1,0 @@
-23/11/09 17:14:39 INFO IntegraConsumer: !!!! STARTING INTEGRA COMPUTE SERVER !!!! 
-23/11/09 17:14:39 INFO IntegraConsumer: Listining kafka Queue Topic Name [ fe-request ] and Servers [ BRO1:9092 ] 
-23/11/09 17:14:55 INFO IntegraConsumer: ==> STEP-1 WF MetaData Read from Kafka and it is Pydantic VALID !!. <== 
-23/11/09 17:14:55 INFO IntegraConsumer: ==> STEP-2 Input Nodes Processing <== 
-23/11/09 17:14:55 INFO IntegraConsumer: ==> STEP-2 SUCCESS !!<==
-23/11/09 17:14:55 INFO IntegraConsumer: ==> STEP-3 Function Nodes Processing <== 
-23/11/09 17:14:55 INFO IntegraConsumer: ==> STEP-3 SUCCESS !!<==
-23/11/09 17:14:55 INFO IntegraConsumer: ==> STEP-4 OutPut Nodes Processing <== 
-23/11/09 17:14:55 INFO IntegraConsumer: ==> STEP-4 SUCCESS !!<==
